@@ -37,7 +37,7 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(settingsMainFragment: SettingsMainFragment)
 
-    fun inject(baseMvpPresenter: BaseMvpPresenter<MvpView>)
+    //fun inject(baseMvpPresenter: BaseMvpPresenter<MvpView>)
     fun inject(settingsBasePresenter: SettingsBasePresenter<MvpView>)
 
     fun inject(mainPresenter: MainPresenter)

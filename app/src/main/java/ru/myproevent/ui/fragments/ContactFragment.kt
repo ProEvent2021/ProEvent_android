@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.ktx.moxyPresenter
 import ru.myproevent.ProEventApp
@@ -27,7 +28,7 @@ class ContactFragment : BaseMvpFragment(), MvpView {
     private val vb get() = _vb!!
 
     override val presenter by moxyPresenter {
-        BaseMvpPresenter<MvpView>().apply { ProEventApp.instance.appComponent.inject(this) }
+        BaseMvpPresenter<MvpView>()//.apply { ProEventApp.instance.appComponent.inject(this) }
     }
 
     override fun onCreateView(
@@ -54,17 +55,17 @@ class ContactFragment : BaseMvpFragment(), MvpView {
                     } else {
                         "[id: ${userId}]"
                     }
-                if(!birthdate.isNullOrBlank()){
+                if (!birthdate.isNullOrBlank()) {
                     dateOfBirthTitle.visibility = VISIBLE
                     dateOfBirthValue.visibility = VISIBLE
                     dateOfBirthValue.text = birthdate
                 }
-                if(!position.isNullOrBlank()){
+                if (!position.isNullOrBlank()) {
                     positionTitle.visibility = VISIBLE
                     positionValue.visibility = VISIBLE
                     positionValue.text = position
                 }
-                if(!msisdn.isNullOrBlank()){
+                if (!msisdn.isNullOrBlank()) {
                     phoneTitle.visibility = VISIBLE
                     phoneValue.visibility = VISIBLE
                     phoneValue.text = msisdn
