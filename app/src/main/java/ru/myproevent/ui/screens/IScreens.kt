@@ -7,6 +7,7 @@ interface IScreens {
     fun authorization(): Screen
     fun home(): Screen
     fun settings(): Screen
+    fun settingsList(): Screen
     fun registration(): Screen
     fun code(): Screen
     fun login(): Screen

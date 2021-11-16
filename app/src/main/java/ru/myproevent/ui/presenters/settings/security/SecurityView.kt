@@ -1,4 +1,4 @@
-package ru.myproevent.ui.presenters.security
+package ru.myproevent.ui.presenters.settings.security
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle

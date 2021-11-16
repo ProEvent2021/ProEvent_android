@@ -1,4 +1,4 @@
-package ru.myproevent.domain.di
+package ru.myproevent.domain.di.cicerone
 
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -7,24 +7,26 @@ import dagger.Module
 import dagger.Provides
 import ru.myproevent.ui.screens.IScreens
 import ru.myproevent.ui.screens.Screens
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class CiceroneModule {
-
-    var cicerone: Cicerone<Router> = Cicerone.create()
-
-    @Singleton
-    @Provides
-    fun provideCicerone(): Cicerone<Router> = cicerone
+class MainCiceroneModule {
+    var mainCicerone: Cicerone<Router> = Cicerone.create()
 
     @Singleton
     @Provides
-    fun provideNavigatorHolder(): NavigatorHolder = cicerone.getNavigatorHolder()
+    fun provideMainCicerone(): Cicerone<Router> = mainCicerone
 
     @Singleton
     @Provides
-    fun provideRouter(): Router = cicerone.router
+    @Named("MainNavigatorHolder")
+    fun provideMainNavigatorHolder(): NavigatorHolder = mainCicerone.getNavigatorHolder()
+
+    @Singleton
+    @Provides
+    @Named("MainRouter")
+    fun provideMainRouter(): Router = mainCicerone.router
 
     @Singleton
     @Provides

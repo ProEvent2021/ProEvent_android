@@ -1,4 +1,4 @@
-package ru.myproevent.ui.presenters.account
+package ru.myproevent.ui.presenters.settings.account
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndStrategy

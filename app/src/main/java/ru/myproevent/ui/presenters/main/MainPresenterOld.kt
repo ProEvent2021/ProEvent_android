@@ -55,6 +55,6 @@ class MainPresenterOld : BaseMvpPresenter<MainView>() {
             return
         }
         currActiveMenu = Menu.SETTINGS
-        router.navigateTo(screens.settings())
+        router.navigateTo(screens.settingsList())
     }
 }

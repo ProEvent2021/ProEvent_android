@@ -11,6 +11,7 @@ import moxy.MvpView
 import ru.myproevent.ProEventApp
 import ru.myproevent.ui.screens.IScreens
 import javax.inject.Inject
+import javax.inject.Named
 
 open class BaseMvpPresenter<V : MvpView> : MvpPresenter<V>() {
 
@@ -18,7 +19,8 @@ open class BaseMvpPresenter<V : MvpView> : MvpPresenter<V>() {
     lateinit var uiScheduler: Scheduler
 
     @Inject
-    lateinit var router: Router
+    @Named("MainRouter")
+    open lateinit var router: Router
 
     @Inject
     lateinit var screens: IScreens

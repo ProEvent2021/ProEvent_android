@@ -20,6 +20,7 @@ import ru.myproevent.ui.presenters.main.MainPresenter
 import ru.myproevent.ui.presenters.main.MainView
 import ru.myproevent.ui.presenters.main.Menu
 import javax.inject.Inject
+import javax.inject.Named
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
@@ -51,6 +52,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     @Inject
+    @Named("MainNavigatorHolder")
     lateinit var navigatorHolder: NavigatorHolder
 
     private val presenter by moxyPresenter {

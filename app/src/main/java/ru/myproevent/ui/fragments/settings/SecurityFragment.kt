@@ -1,4 +1,4 @@
-package ru.myproevent.ui.fragments
+package ru.myproevent.ui.fragments.settings
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -17,10 +17,9 @@ import ru.myproevent.ProEventApp
 import ru.myproevent.databinding.FragmentSecurityBinding
 import ru.myproevent.domain.model.ProfileDto
 import ru.myproevent.ui.BackButtonListener
-import ru.myproevent.ui.presenters.main.MainView
-import ru.myproevent.ui.presenters.main.Menu
-import ru.myproevent.ui.presenters.security.SecurityPresenter
-import ru.myproevent.ui.presenters.security.SecurityView
+import ru.myproevent.ui.fragments.BaseMvpFragment
+import ru.myproevent.ui.presenters.settings.security.SecurityPresenter
+import ru.myproevent.ui.presenters.settings.security.SecurityView
 import ru.myproevent.ui.views.KeyboardAwareTextInputEditText
 
 // TODO: рефакторинг: Данный фрагмент во многом копирует AccountFragment. Вынести общее в абстрактынй класс

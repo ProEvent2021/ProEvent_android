@@ -1,4 +1,4 @@
-package ru.myproevent.ui.presenters.security
+package ru.myproevent.ui.presenters.settings.account
 
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableSingleObserver
@@ -9,9 +9,7 @@ import ru.myproevent.domain.model.repositories.profiles.IProEventProfilesReposit
 import ru.myproevent.ui.presenters.BaseMvpPresenter
 import javax.inject.Inject
 
-
-// TODO: рефакторинг: данный presenter практически копирует AccountPresenter. Возможно стоит вынести общий функционал в абстрактынй класс
-class SecurityPresenter : BaseMvpPresenter<SecurityView>() {
+class AccountPresenter : BaseMvpPresenter<AccountView>() {
     private inner class ProfileEditObserver : DisposableCompletableObserver() {
         override fun onComplete() {
             viewState.showMessage("Изменения сохранены")
@@ -57,12 +55,22 @@ class SecurityPresenter : BaseMvpPresenter<SecurityView>() {
     @Inject
     lateinit var interAccessInfoRepository: IInternetAccessInfoRepository
 
-    fun saveProfile(email: String, login: String, password: String) {
+    fun saveProfile(
+        name: String,
+        phone: String,
+        dateOfBirth: String,
+        position: String,
+        role: String
+    ) {
         profilesRepository
             .saveProfile(
                 ProfileDto(
                     userId = loginRepository.getLocalId()!!,
-                    nickName = login
+                    fullName = name,
+                    msisdn = phone,
+                    position = position,
+                    birthdate = dateOfBirth,
+                    description = role
                 )
             )
             .observeOn(uiScheduler)
