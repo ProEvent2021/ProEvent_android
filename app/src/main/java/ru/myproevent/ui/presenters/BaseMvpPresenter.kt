@@ -23,7 +23,7 @@ open class BaseMvpPresenter<V : MvpView> : MvpPresenter<V>() {
     open lateinit var router: Router
 
     @Inject
-    lateinit var screens: IScreens
+    open lateinit var screens: IScreens
 
     private var compositeDisposable = CompositeDisposable()
 
