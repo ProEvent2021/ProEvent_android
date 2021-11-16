@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import moxy.ktx.moxyPresenter
 import ru.myproevent.ProEventApp
 import ru.myproevent.R
 import ru.myproevent.databinding.FragmentSettingsMainBinding
@@ -21,6 +20,8 @@ import ru.myproevent.ui.presenters.settings.main.SettingsMainPresenter
 import ru.myproevent.ui.presenters.settings.main.SettingsMainView
 import javax.inject.Inject
 import javax.inject.Named
+import moxy.presenter.ProvidePresenter
+import moxy.presenter.InjectPresenter
 
 class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonListener {
 
@@ -61,18 +62,27 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
         fun newInstance() = SettingsMainFragment()
     }
 
-    override val presenter by moxyPresenter {
-        SettingsMainPresenter().apply {
-            ProEventApp.instance.appComponent.inject(this)
-        }
+//    override val presenter by moxyPresenter {
+//        SettingsMainPresenter().apply {
+//            ProEventApp.instance.appComponent.inject(this)
+//        }
+//    }
+
+    @Inject
+    @InjectPresenter
+    override lateinit var presenter: SettingsMainPresenter
+
+    @ProvidePresenter
+    fun providePresenter(): SettingsMainPresenter {
+        return presenter
     }
 
     private var _view: FragmentSettingsMainBinding? = null
     private val view get() = _view!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         ProEventApp.instance.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(

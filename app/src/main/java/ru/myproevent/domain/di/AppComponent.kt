@@ -29,6 +29,7 @@ import javax.inject.Singleton
         AppModule::class,
         MainCiceroneModule::class,
         SettingsCiceroneModule::class,
+        PresentersModule::class,
         ProEventApiModule::class,
         ProEventRepositoriesModule::class
     ]
