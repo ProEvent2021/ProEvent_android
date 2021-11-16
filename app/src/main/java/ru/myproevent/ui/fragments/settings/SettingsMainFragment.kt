@@ -24,17 +24,19 @@ import javax.inject.Named
 
 class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonListener {
 
-    private val navigator: Navigator = object : AppNavigator(requireActivity(), R.id.container) {
-        override fun setupFragmentTransaction(
-            fragmentTransaction: FragmentTransaction,
-            currentFragment: Fragment?,
-            nextFragment: Fragment?
-        ) {
-            setVerticalTransitionAnimation(
-                currentFragment,
-                nextFragment,
-                fragmentTransaction
-            )
+    private val navigator: Navigator by lazy {
+        object : AppNavigator(requireActivity(), R.id.settings_container, childFragmentManager) {
+            override fun setupFragmentTransaction(
+                fragmentTransaction: FragmentTransaction,
+                currentFragment: Fragment?,
+                nextFragment: Fragment?
+            ) {
+                setVerticalTransitionAnimation(
+                    currentFragment,
+                    nextFragment,
+                    fragmentTransaction
+                )
+            }
         }
     }
 
@@ -56,7 +58,7 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
     lateinit var navigatorHolder: NavigatorHolder
 
     companion object {
-        fun newInstance() = SettingsListListFragment()
+        fun newInstance() = SettingsMainFragment()
     }
 
     override val presenter by moxyPresenter {
