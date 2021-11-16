@@ -9,10 +9,10 @@ import javax.inject.Named
 open class SettingsBasePresenter<V : MvpView>: BaseMvpPresenter<V>() {
 //    @Inject
 //    @Named("SettingsRouter")
-//    override lateinit var router: Router
-//
+//    lateinit var localRouter: Router
+
 //    override fun backPressed(): Boolean {
-//        router.exit()
+//        localRouter.exit()
 //        return true
 //    }
 }
