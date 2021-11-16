@@ -5,7 +5,8 @@ import ru.myproevent.ui.presenters.BaseMvpPresenter
 import ru.myproevent.ui.presenters.settings.SettingsBasePresenter
 import javax.inject.Inject
 
-class SettingsMainPresenter : BaseMvpPresenter<SettingsMainView>() {
+//class SettingsMainPresenter : BaseMvpPresenter<SettingsMainView>() {
+class SettingsMainPresenter : SettingsBasePresenter<SettingsMainView>() {
 //    @Inject
 //    @Named("SettingsRouter")
 //    lateinit var localRouter: Router
