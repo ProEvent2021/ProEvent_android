@@ -124,6 +124,7 @@
             android:layout_height="35dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="12dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_input_container" />
 
@@ -133,6 +134,7 @@
             android:layout_marginStart="8dp"
             android:text="Запомнить меня"
             android:textSize="15sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rememberMeCheckbox"
             app:layout_constraintStart_toEndOf="@+id/rememberMeCheckbox"
             app:layout_constraintTop_toTopOf="@+id/rememberMeCheckbox" />
