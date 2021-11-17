@@ -80,8 +80,7 @@ class SettingsListListFragment : BaseMvpFragment(), SettingsListView, BackButton
     lateinit var screens: IScreens
 
     override fun showAccount() {
-        Log.d("[MYLOG]", "localRouter.navigateTo(screens.account())")
-        localRouter.navigateTo(screens.account())
+        (parentFragment as SettingsMainFragment).providePresenter().showAccount()
     }
 
     override fun showSecurity() {

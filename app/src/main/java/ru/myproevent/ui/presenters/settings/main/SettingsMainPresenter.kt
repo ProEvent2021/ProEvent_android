@@ -14,4 +14,8 @@ class SettingsMainPresenter : SettingsBasePresenter<SettingsMainView>() {
             viewState.init()
         }
     }
+
+    fun showAccount(){
+        viewState.showAccount()
+    }
 }

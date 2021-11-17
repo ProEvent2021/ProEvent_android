@@ -57,10 +57,10 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
                 }
             }
 
+            // https://github.com/terrakok/Cicerone/issues/104
             override fun applyCommands(commands: Array<out Command>) {
                 try {
                     fragmentManager.executePendingTransactions()
-                    //copy stack before apply commands
                     copyStackToLocal()
                     for (command in commands) {
                         applyCommand(command)
@@ -154,5 +154,10 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
     override fun init() {
         localRouter.navigateTo(screens.settingsList())
         Log.d("[MYLOG]", "localRouter.replaceScreen(screens.settingsList())")
+    }
+
+    override fun showAccount() {
+        Log.d("[MYLOG]", "localRouter.navigateTo(screens.account())")
+        localRouter.navigateTo(screens.account())
     }
 }

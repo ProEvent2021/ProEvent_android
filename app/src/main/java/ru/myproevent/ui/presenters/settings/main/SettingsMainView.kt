@@ -6,4 +6,5 @@ import moxy.viewstate.strategy.alias.SingleState
 @SingleState
 interface SettingsMainView : MvpView{
     fun init()
+    fun showAccount()
 }
