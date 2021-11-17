@@ -5,6 +5,7 @@ import moxy.MvpView
 import ru.myproevent.domain.di.cicerone.MainCiceroneModule
 import ru.myproevent.domain.di.cicerone.SettingsCiceroneModule
 import ru.myproevent.ui.activity.MainActivity
+import ru.myproevent.ui.fragments.settings.SettingsListListFragment
 import ru.myproevent.ui.fragments.settings.SettingsMainFragment
 import ru.myproevent.ui.presenters.BaseMvpPresenter
 import ru.myproevent.ui.presenters.settings.account.AccountPresenter
@@ -37,6 +38,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(settingsMainFragment: SettingsMainFragment)
+    fun inject(settingsListListFragment: SettingsListListFragment)
 
     //fun inject(baseMvpPresenter: BaseMvpPresenter<MvpView>)
     //fun inject(settingsBasePresenter: SettingsBasePresenter<MvpView>)

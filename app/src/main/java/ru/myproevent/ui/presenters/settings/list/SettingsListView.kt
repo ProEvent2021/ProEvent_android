@@ -1,7 +1,10 @@
 package ru.myproevent.ui.presenters.settings.list
 
 import moxy.MvpView
-import moxy.viewstate.strategy.alias.AddToEndSingle
+import moxy.viewstate.strategy.alias.SingleState
 
-@AddToEndSingle
-interface SettingsListView : MvpView
+@SingleState
+interface SettingsListView : MvpView{
+    fun showAccount()
+    fun showSecurity()
+}

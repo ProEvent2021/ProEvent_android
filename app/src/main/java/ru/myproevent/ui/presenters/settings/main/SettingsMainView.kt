@@ -1,7 +1,9 @@
 package ru.myproevent.ui.presenters.settings.main
 
 import moxy.MvpView
-import moxy.viewstate.strategy.alias.AddToEndSingle
+import moxy.viewstate.strategy.alias.SingleState
 
-@AddToEndSingle
-interface SettingsMainView : MvpView
+@SingleState
+interface SettingsMainView : MvpView{
+    fun init()
+}

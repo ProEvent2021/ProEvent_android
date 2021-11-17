@@ -1,14 +1,20 @@
 package ru.myproevent.ui.fragments.settings
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.github.terrakok.cicerone.androidx.TransactionInfo
 import ru.myproevent.ProEventApp
 import ru.myproevent.R
 import ru.myproevent.databinding.FragmentSettingsMainBinding
@@ -22,6 +28,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import moxy.presenter.ProvidePresenter
 import moxy.presenter.InjectPresenter
+import ru.myproevent.ui.screens.IScreens
 
 class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonListener {
 
@@ -37,6 +44,33 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
                     nextFragment,
                     fragmentTransaction
                 )
+            }
+
+
+            private val handler: Handler = Handler(Looper.getMainLooper())
+
+            private fun copyStackToLocal() {
+                localStackCopy.clear()
+                for (i in 0 until fragmentManager.backStackEntryCount) {
+                    val str = fragmentManager.getBackStackEntryAt(i).name
+                    localStackCopy.add(TransactionInfo.fromString(str!!))
+                }
+            }
+
+            override fun applyCommands(commands: Array<out Command>) {
+                try {
+                    fragmentManager.executePendingTransactions()
+                    //copy stack before apply commands
+                    copyStackToLocal()
+                    for (command in commands) {
+                        applyCommand(command)
+                    }
+                } catch (error: IllegalStateException) {
+                    Log.d("[MYLOG]", "$error")
+                    handler.postDelayed({
+                        applyCommands(commands)
+                    }, 100)
+                }
             }
         }
     }
@@ -108,5 +142,17 @@ class SettingsMainFragment : BaseMvpFragment(), SettingsMainView, BackButtonList
     override fun onDestroy() {
         super.onDestroy()
         _view = null
+    }
+
+    @Inject
+    @Named("SettingsRouter")
+    lateinit var localRouter: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+    override fun init() {
+        localRouter.navigateTo(screens.settingsList())
+        Log.d("[MYLOG]", "localRouter.replaceScreen(screens.settingsList())")
     }
 }

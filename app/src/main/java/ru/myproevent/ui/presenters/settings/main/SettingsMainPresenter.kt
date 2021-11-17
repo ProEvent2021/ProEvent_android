@@ -10,8 +10,8 @@ class SettingsMainPresenter : SettingsBasePresenter<SettingsMainView>() {
         super.onFirstViewAttach()
         if (!isScreenInitialized) {
             isScreenInitialized = true
-            localRouter.replaceScreen(screens.settingsList())
-            Log.d("[MYLOG]", "localRouter.replaceScreen(screens.settingsList())")
+            Log.d("[MYLOG]", "viewState.init()")
+            viewState.init()
         }
     }
 }
