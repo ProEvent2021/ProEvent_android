@@ -132,11 +132,24 @@ class AccountFragment : BaseMvpFragment<FragmentAccountBinding>(FragmentAccountB
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO Передавать фрагмент слишком жирно, нужно придумать что проще
         CropImageHandler(
             viewOnClick = editUserImage,
-            viewToLoad = userImageView,
-            resultCaller = this@AccountFragment,
+            pickImageActivityResultLauncherCallback = { pickImageActivityContract, cropActivityResultLauncher ->
+                registerForActivityResult(pickImageActivityContract) {
+                    it?.let { uri -> cropActivityResultLauncher.launch(uri) }
+                }
+            },
+            cropActivityResultLauncherCallback = { cropActivityContract ->
+                registerForActivityResult(cropActivityContract) {
+                    it?.let { uri ->
+                        Glide.with(userImageView)
+                            .load(uri)
+                            .circleCrop()
+                            .into(userImageView)
+                        newPictureUri = uri
+                    }
+                }
+            },
             isCircle = true
         ).init()
         defaultKeyListener = nameEdit.keyListener

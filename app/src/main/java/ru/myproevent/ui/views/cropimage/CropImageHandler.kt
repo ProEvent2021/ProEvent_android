@@ -14,8 +14,8 @@ import java.io.File
 
 class CropImageHandler(
     private val viewOnClick: View,
-    private val viewToLoad: ImageView,
-    private val resultCaller: CropImageView,
+    private val pickImageActivityResultLauncherCallback: (pickImageActivityContract: ActivityResultContract<Any?, Uri?>, cropActivityResultLauncher: ActivityResultLauncher<Uri>) -> ActivityResultLauncher<Any?>,
+    private val cropActivityResultLauncherCallback: (cropActivityContract: ActivityResultContract<Uri, Uri?>) -> ActivityResultLauncher<Uri>,
     private val isCircle: Boolean
 ) {
     private lateinit var pickImageActivityResultLauncher: ActivityResultLauncher<Any?>
@@ -66,19 +66,9 @@ class CropImageHandler(
     }
 
     fun init() {
+        cropActivityResultLauncher = cropActivityResultLauncherCallback(cropActivityContract)
         pickImageActivityResultLauncher =
-            resultCaller.registerForActivityResult(pickImageActivityContract) {
-                it?.let { uri -> cropActivityResultLauncher.launch(uri) }
-            }
-        cropActivityResultLauncher = resultCaller.registerForActivityResult(cropActivityContract) {
-            it?.let { uri ->
-                Glide.with(viewToLoad)
-                    .load(uri)
-                    .circleCrop()
-                    .into(viewToLoad)
-                resultCaller.newPictureUri = uri
-            }
-        }
+            pickImageActivityResultLauncherCallback(pickImageActivityContract, cropActivityResultLauncher)
         viewOnClick.setOnClickListener { pickImageActivityResultLauncher.launch(null) }
     }
 
